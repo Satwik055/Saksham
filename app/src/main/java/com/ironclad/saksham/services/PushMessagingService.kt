@@ -3,6 +3,7 @@ package com.ironclad.saksham.services
 import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.content.Context
+import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -27,6 +28,13 @@ class PushMessagingService: FirebaseMessagingService() {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_stat_notification)
+            .setLargeIcon(
+                BitmapFactory.decodeResource(
+                    applicationContext.resources,
+                    R.drawable.ic_stat_notification
+                )
+            )
             .setContentTitle(title)
             .setContentText(text)
             .setAutoCancel(true)
