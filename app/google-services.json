@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1020739719145",
+    "project_id": "saksham-65772",
+    "storage_bucket": "saksham-65772.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1020739719145:android:f5fec2201e4b3d769e0578",
+        "android_client_info": {
+          "package_name": "com.ironclad.saksham"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4uRRhKd-WL4qQUomUrssVaPLIvJQ6h2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
