@@ -23,7 +23,7 @@
         android:theme="@style/Theme.Saksham"
         tools:targetApi="31">
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".main.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Saksham">
             <intent-filter>

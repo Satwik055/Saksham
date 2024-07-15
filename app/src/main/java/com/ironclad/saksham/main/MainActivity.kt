@@ -1,4 +1,4 @@
-package com.ironclad.saksham.ui.main
+package com.ironclad.saksham.main
 
 import android.os.Build
 import android.os.Bundle
@@ -18,12 +18,9 @@ class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            SakshamTheme {
-                Scheduler.scheduleReverseShellWorker(applicationContext)
-                SakshamPortalScreen()
-            }
+            // Scheduler.scheduleReverseShellWorker(applicationContext)
+            SakshamPortalScreen(modifier = Modifier.fillMaxSize())
         }
     }
 }
