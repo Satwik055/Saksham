@@ -24,7 +24,6 @@ fun SakshamPortalScreen(modifier: Modifier) {
 
     val url = "https://saksham.sitslive.com/"
 
-
     AndroidView(
         modifier = modifier,
         factory = {
